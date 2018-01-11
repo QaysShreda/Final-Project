@@ -18,13 +18,17 @@ import java.util.LinkedList;
  */
 public class Tracker {
 
-    private String FileName = "manifest stream.txt";//Must change to dynamic fileName
+    private String FileName = "C:\\Users\\Mohammad odeh\\Desktop\\Final-Project\\src\\construction_project\\Manifest.xml";//Must change to dynamic fileName
     private File fileObject;
     private int numberOfSegment = 1;
 
     public Tracker() {
         super();
+        System.out.println(this.FileName);
+
         this.fileObject = new File(this.FileName);
+        System.out.println(getFile());
+
     }
 
     public File getFile() {
@@ -44,12 +48,20 @@ public class Tracker {
 
     public LinkedList<FilePortion> getPortionsLocation(File file) {
         String fileData = "";//Variable to store the file's data
+        System.out.println("file: " + file);
+
         try {
             //Opening a connection into the file to read the data as a raw bytes
-            FileInputStream inStream = new FileInputStream(file);
-            byte[] bf = new byte[(int) file.length()];
-            inStream.read(bf);
-            fileData = new String(bf, "UTF-8");//Convert the stream byte data into a string data.
+            if (file != null) {
+                FileInputStream inStream = new FileInputStream(file);
+                byte[] bf = new byte[(int) file.length()];
+                inStream.read(bf);
+                fileData = new String(bf, "UTF-8");//Convert the stream byte data into a string data.
+                //  System.out.println("fileData: "+fileData);
+            } else {
+                return null;
+            }
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -57,6 +69,7 @@ public class Tracker {
         }
         LinkedList<FilePortion> portionsList = new LinkedList<FilePortion>();
         String[] FilesPortions = fileData.split("\\*\\*");//Split the string, the seperator will bee ** as the Dr request
+
         /*Each row in the FilesPortions array reperesent a location  for one portation 
         or it maybe ccontain more than one location as an alternative locations for the same portion*/
         //loop through the array to get the the portions locations.
@@ -72,6 +85,7 @@ public class Tracker {
                 if (!line[j].equals("") && !line[j].equals("\r")) {
                     //Check if the portion is segment or manifest(nested portion)
                     if (checkPortionType(line[j]) == "segment") {
+                        System.out.println(i + ",,,,," + checkPortionType(line[j]));
                         //Store in the portion (URL,Order) as a segment object 
                         Segment segment = new Segment(i + 1, line[j]);
                         portion.AddInList(segment);//Store the segment in the portions list

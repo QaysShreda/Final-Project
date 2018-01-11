@@ -26,5 +26,9 @@ public class Segment {
         this.segmentURL = segmentURL;
         this.count++;
     }
+    
+    public String showSegmentData() {
+		return "Segment1: [nameURL=" + segmentURL + ", number=" + orderNum + "]\n";
+	}
 
 }

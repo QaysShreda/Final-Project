@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <root>
-  <manifests>
-  <manifest id="http://machine.birzeit.edu/doc.txt.segments">
-    <segment>C:/machine1.birzeit.edu/doc.txt-segment1</segment>
-    <segment>D:/machine1.birzeit.edu/doc.txt-segment1</segment>
-    <segment>**</segment>
-    <segmint>C:/machine1.birzeit.edu/doc.txt-segment2</segmint>
-    <segmint>C:/machine1.birzeit.edu/doc.txt-segment3</segmint>
- </manifest>
- 
+  <manifests> 
    <manifest id="http://machine.birzeit.edu/DB.txt.segments">
     <segment>C:/machine1.birzeit.edu/DB.txt-segment1</segment>
     <segment>**</segment>
@@ -17,6 +9,5 @@
     <segment>**</segment>
     <segmint>C:/machine1.birzeit.edu/DB.txt-segment3</segmint>
  </manifest>
-  
 </manifests>  
 </root>

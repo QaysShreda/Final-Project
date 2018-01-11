@@ -16,9 +16,6 @@ private int portionNumber;
 private String string;
 private LinkedList<Object> list;
 
-public enum States {
-    QUEUED, DOWNLOADING, RETRYING, ERROR, STOP, DONE;
-}
 int status;
 public FilePortion() {
 	super();
@@ -67,4 +64,8 @@ public void setPortionNumber(int portionNumber) {
 	this.portionNumber = portionNumber;
 }
 
+public String showPortionData() {
+	return "Portion: [PortionNumber=" + portionNumber + ", string=" + string + ", list="
+			+ list + "]\n";
+}
 }
