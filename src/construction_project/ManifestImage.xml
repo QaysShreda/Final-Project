@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+  <manifests> 
+   <manifest id="http://machine.birzeit.edu/DB.txt.segments">
+    <segment>http://localhost/machine1.birzeit.eduDB/Capture.PNG-segment1.001</segment>
+    <segment>**</segment>
+    <segment>http://localhost/machine2.birzeit.eduDB/Capture.PNG-segment2.002</segment>
+    <segment>**</segment>
+    <segment>http://localhost/machine3.birzeit.eduDB/Capture.PNG-segment3.003</segment>
+ </manifest>
+</manifests>  
+</root>

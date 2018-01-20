@@ -3,11 +3,11 @@
 <root>
   <manifests> 
    <manifest id="http://machine.birzeit.edu/DB.txt.segments">
-    <segment>C:/machine1.birzeit.edu/DB.txt-segment1</segment>
+    <segment>http://localhost/machine1.birzeit.eduDB/DB.txt-segment1.txt</segment>
     <segment>**</segment>
-    <segmint>C:/machine1.birzeit.edu/DB.txt-segment2</segmint>
+    <segment>http://localhost/machine2.birzeit.eduDB/DB.txt-segment2.txt</segment>
     <segment>**</segment>
-    <segmint>C:/machine1.birzeit.edu/DB.txt-segment3</segmint>
+    <segment>http://localhost/machine3.birzeit.eduDB/DB.txt-segment3.txt</segment>
  </manifest>
 </manifests>  
 </root>

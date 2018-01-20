@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+    <manifests> 
+        <manifest id="http://machine.birzeit.edu/DB.txt.segments">
+            <segment>http://localhost/machine1.birzeit.eduDB/captureTest.PNG-segment1.001</segment>
+            <segment>**</segment>
+            <segment>http://localhost/machine1.birzeit.eduDB/captureTest.PNG-segment2.002</segment>
+            <segment>**</segment>
+            <segment>http://localhost/machine1.birzeit.eduDB/captureTest.PNG-segment3.003</segment>
+            <segment>**</segment>
+            <segment>http://localhost/machine2.birzeit.eduDB/captureTest.PNG-segment4.004</segment>
+            <segment>**</segment>
+            <segment>http://localhost/machine2.birzeit.eduDB/captureTest.PNG-segment5.005</segment>
+            <segment>**</segment>
+            <segment>http://localhost/machine2.birzeit.eduDB/captureTest.PNG-segment6.006</segment>
+            <segment>**</segment>
+            <segment>http://localhost/machine3.birzeit.eduDB/captureTest.PNG-segment7.007</segment>
+        </manifest>
+    </manifests>  
+</root>

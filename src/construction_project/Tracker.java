@@ -18,17 +18,25 @@ import java.util.LinkedList;
  */
 public class Tracker {
 
-    private String FileName = "C:\\Users\\Mohammad odeh\\Desktop\\Final-Project\\src\\construction_project\\Manifest.xml";//Must change to dynamic fileName
+    private String FileName = "";//Must change to dynamic fileName
     private File fileObject;
     private int numberOfSegment = 1;
 
-    public Tracker() {
+    public Tracker(String FileName) {
         super();
-        System.out.println(this.FileName);
+        System.out.println("test" + FileName);
 
-        this.fileObject = new File(this.FileName);
+        this.fileObject = new File(FileName);
         System.out.println(getFile());
 
+    }
+
+    public String getFileName() {
+        return FileName;
+    }
+
+    public void setFileName(String fileName) {
+        FileName = fileName;
     }
 
     public File getFile() {
@@ -37,7 +45,9 @@ public class Tracker {
 
     public String checkPortionType(String PortionURL) {
         PortionURL = PortionURL.replaceAll("\r", "");
-        if (PortionURL.contains("-segment")) {
+        if (PortionURL.contains("-seq")) {
+            return "sequnce";
+        } else if (PortionURL.contains("-segment")) {
             return "segment";
         } else if (PortionURL.contains("-text")) {
             return "manifest";
@@ -46,27 +56,21 @@ public class Tracker {
         }
     }
 
-    public LinkedList<FilePortion> getPortionsLocation(File file) {
+    public LinkedList<FilePortion> getPortionsLocation(File file) throws FileNotFoundException, IOException {
         String fileData = "";//Variable to store the file's data
         System.out.println("file: " + file);
 
-        try {
-            //Opening a connection into the file to read the data as a raw bytes
-            if (file != null) {
-                FileInputStream inStream = new FileInputStream(file);
-                byte[] bf = new byte[(int) file.length()];
-                inStream.read(bf);
-                fileData = new String(bf, "UTF-8");//Convert the stream byte data into a string data.
-                //  System.out.println("fileData: "+fileData);
-            } else {
-                return null;
-            }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        //Opening a connection into the file to read the data as a raw bytes
+        if (file != null) {
+            FileInputStream inStream = new FileInputStream(file);
+            byte[] bf = new byte[(int) file.length()];
+            inStream.read(bf);
+            fileData = new String(bf, "UTF-8");//Convert the stream byte data into a string data.
+            //  System.out.println("fileData: "+fileData);
+        } else {
+            return null;
         }
+
         LinkedList<FilePortion> portionsList = new LinkedList<FilePortion>();
         String[] FilesPortions = fileData.split("\\*\\*");//Split the string, the seperator will bee ** as the Dr request
 
@@ -85,9 +89,12 @@ public class Tracker {
                 if (!line[j].equals("") && !line[j].equals("\r")) {
                     //Check if the portion is segment or manifest(nested portion)
                     if (checkPortionType(line[j]) == "segment") {
-                        System.out.println(i + ",,,,," + checkPortionType(line[j]));
+                        String urlSeg = line[j].replaceAll("<segment>", "");
+                        urlSeg = urlSeg.replaceAll("</segment>", "");
+                        //     System.out.println(i + ",,,,," + checkPortionType(line[j])+",,,,"+urlSeg);
                         //Store in the portion (URL,Order) as a segment object 
-                        Segment segment = new Segment(i + 1, line[j]);
+
+                        Segment segment = new Segment(i + 1, urlSeg);
                         portion.AddInList(segment);//Store the segment in the portions list
 
                     } else if (checkPortionType(line[j]) == "manifest") {
@@ -95,7 +102,11 @@ public class Tracker {
                         //Start recursive calling until reach a segment file
                         manifest.list = getPortionsLocation(new File(manifest.getURLName()));
                         portion.AddInList(manifest);
-                    }
+                    } /*else if (checkPortionType(line[j]) == "sequnce") {
+                        Multipart multipart = new Multipart(i + 1, line[j]);
+                        //Start recursive calling until reach a segment file
+                        portion.AddInList(multipart);
+                    }*/
                 }
             }
             portionsList.add(portion);
